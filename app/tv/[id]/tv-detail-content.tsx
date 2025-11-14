@@ -145,7 +145,6 @@ export function TVDetailContent({ show, initialSeason, initialEpisode, isWatchMo
     )
   }
   
-  const tvId = id || show.id
   const trailer = show.videos?.results?.find(v => v.type === 'Trailer' && v.site === 'YouTube')
   const logo = show.images?.logos?.find(l => l.file_path)
   const cast = show.credits?.cast?.slice(0, 10) || []
