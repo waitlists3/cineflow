@@ -166,3 +166,9 @@ export const getRecommendations = async (id: number, mediaType: 'movie' | 'tv'):
   const data = await res.json()
   return data.results || []
 }
+
+export const getSimilar = async (id: number, mediaType: 'movie' | 'tv'): Promise<Movie[]> => {
+  const res = await fetch(`${TMDB_BASE_URL}/${mediaType}/${id}/similar?api_key=${TMDB_API_KEY}`)
+  const data = await res.json()
+  return data.results || []
+}
