@@ -3,8 +3,9 @@ import { TVDetailContent } from './tv-detail-content'
 import { MediaRow } from '@/components/media-row'
 import type { Metadata } from 'next'
 
-export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
-  const show = await getTVDetails(parseInt(params.id))
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+  const { id } = await params
+  const show = await getTVDetails(parseInt(id))
   
   return {
     title: `${show.name} - CineFlow`,
@@ -21,17 +22,20 @@ export default async function TVPage({
   params,
   searchParams 
 }: { 
-  params: { id: string }
-  searchParams: { watch?: string }
+  params: Promise<{ id: string }>
+  searchParams: Promise<{ watch?: string }>
 }) {
-  const show = await getTVDetails(parseInt(params.id))
+  const { id } = await params
+  const { watch } = await searchParams
+  
+  const show = await getTVDetails(parseInt(id))
   const recommendations = await getRecommendations(show.id, 'tv')
   
   return (
     <main className="min-h-screen pt-16">
       <TVDetailContent 
         show={show} 
-        isWatchMode={searchParams.watch === 'true'}
+        isWatchMode={watch === 'true'}
       />
       
       {recommendations.length > 0 && (

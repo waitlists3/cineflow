@@ -59,7 +59,10 @@ export const metadata: Metadata = {
     statusBarStyle: 'black-translucent',
     title: 'CineFlow',
   },
-    generator: 'cat'
+  generator: 'cat',
+  icons: {
+    icon: '/favicon.png',
+  },
 }
 
 export const viewport: Viewport = {

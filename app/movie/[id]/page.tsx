@@ -18,15 +18,18 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
 }
 
 export default async function MoviePage({ params, searchParams }: { 
-  params: { id: string }
-  searchParams: { watch?: string }
+  params: Promise<{ id: string }>
+  searchParams: Promise<{ watch?: string }>
 }) {
-  const movie = await getMovieDetails(parseInt(params.id))
+  const resolvedParams = await params
+  const resolvedSearchParams = await searchParams
+  
+  const movie = await getMovieDetails(parseInt(resolvedParams.id))
   const recommendations = await getRecommendations(movie.id, 'movie')
   
   return (
     <main className="min-h-screen pt-16">
-      <MovieDetailContent movie={movie} isWatchMode={searchParams.watch === 'true'} />
+      <MovieDetailContent movie={movie} isWatchMode={resolvedSearchParams.watch === 'true'} />
       
       {recommendations.length > 0 && (
         <div className="py-12">
