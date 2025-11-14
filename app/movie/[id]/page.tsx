@@ -33,16 +33,12 @@ export default async function MoviePage({
   const resolvedParams = await params
   const resolvedSearchParams = await searchParams
 
-  if (resolvedSearchParams.watch === 'true') {
-    redirect(`https://vidzy.luna.tattoo/embed/movie/${resolvedParams.id}`)
-  }
-
   const movie = await getMovieDetails(parseInt(resolvedParams.id))
   const recommendations = await getRecommendations(movie.id, 'movie')
 
   return (
     <main className="min-h-screen pt-16">
-      <MovieDetailContent movie={movie} isWatchMode={false} />
+      <MovieDetailContent movie={movie} isWatchMode={resolvedSearchParams.watch === 'true'} />
 
       {recommendations.length > 0 && (
         <div className="py-12">

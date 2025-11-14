@@ -44,7 +44,9 @@ export function MovieDetailContent({ movie, isWatchMode }: { movie: MovieDetails
       title: movie.title,
       poster: movie.poster_path || '',
     })
-    window.history.pushState({}, '', `?watch=true`)
+    const url = new URL(window.location.href)
+    url.searchParams.set('watch', 'true')
+    window.history.pushState({}, '', url.toString())
     window.dispatchEvent(new Event('continueWatchingUpdate'))
   }
   
@@ -60,7 +62,9 @@ export function MovieDetailContent({ movie, isWatchMode }: { movie: MovieDetails
           className="absolute top-6 right-6 z-50 text-foreground hover:opacity-80 transition-opacity"
           onClick={() => {
             setShowPlayer(false)
-            window.history.pushState({}, '', window.location.pathname)
+            const url = new URL(window.location.href)
+            url.searchParams.delete('watch')
+            window.history.pushState({}, '', url.toString())
           }}
           aria-label="Close player"
         >

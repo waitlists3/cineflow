@@ -108,7 +108,9 @@ export function TVDetailContent({ show, initialSeason, initialEpisode, isWatchMo
   const handlePlayEpisode = (episodeNumber: number) => {
     setCurrentEpisode(episodeNumber)
     setShowPlayer(true)
-    window.history.pushState({}, '', `/tv/${show.id}/${selectedSeason}/${episodeNumber}?watch=true`)
+    const url = new URL(window.location.href)
+    url.searchParams.set('watch', 'true')
+    window.history.pushState({}, '', url.toString())
     
     addToContinueWatching({
       id: show.id,
@@ -128,7 +130,9 @@ export function TVDetailContent({ show, initialSeason, initialEpisode, isWatchMo
           className="absolute top-6 right-6 z-50 text-foreground hover:opacity-80 transition-opacity"
           onClick={() => {
             setShowPlayer(false)
-            window.history.pushState({}, '', `/tv/${show.id}/${selectedSeason}/${currentEpisode}`)
+            const url = new URL(window.location.href)
+            url.searchParams.delete('watch')
+            window.history.pushState({}, '', url.toString())
           }}
           aria-label="Close player"
         >
