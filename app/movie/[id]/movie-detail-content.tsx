@@ -217,12 +217,11 @@ export function MovieDetailContent({ movie, isWatchMode }: { movie: MovieDetails
               {cast.map(member => {
                 const profileUrl = getImageUrl(member.profile_path, 'w185')
                 return (
-                  <Link 
-                    key={member.id} 
-                    href={`/person/${member.id}`}
-                    className="group space-y-2"
+                  <div
+                    key={member.id}
+                    className="space-y-2"
                   >
-                    <div className="relative aspect-[2/3] rounded-lg overflow-hidden glass-hover bg-muted">
+                    <div className="relative aspect-[2/3] rounded-lg overflow-hidden bg-muted">
                       {profileUrl ? (
                         <Image
                           src={profileUrl || "/placeholder.svg"}
@@ -237,10 +236,10 @@ export function MovieDetailContent({ movie, isWatchMode }: { movie: MovieDetails
                       )}
                     </div>
                     <div>
-                      <p className="font-medium text-sm group-hover:text-primary transition-colors">{member.name}</p>
+                      <p className="font-medium text-sm">{member.name}</p>
                       <p className="text-xs text-muted-foreground line-clamp-1">{member.character}</p>
                     </div>
-                  </Link>
+                  </div>
                 )
               })}
             </div>

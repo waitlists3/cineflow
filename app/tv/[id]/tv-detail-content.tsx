@@ -333,12 +333,11 @@ export function TVDetailContent({ show, initialSeason, initialEpisode, isWatchMo
             <h2 className="text-2xl font-bold">Cast</h2>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
               {cast.map(member => (
-                <Link 
-                  key={member.id} 
-                  href={`/person/${member.id}`}
-                  className="group space-y-2"
+                <div
+                  key={member.id}
+                  className="space-y-2"
                 >
-                  <div className="relative aspect-[2/3] rounded-lg overflow-hidden glass-hover">
+                  <div className="relative aspect-[2/3] rounded-lg overflow-hidden">
                     <Image
                       src={getImageUrl(member.profile_path, 'w185') || "/placeholder.svg"}
                       alt={member.name}
@@ -347,10 +346,10 @@ export function TVDetailContent({ show, initialSeason, initialEpisode, isWatchMo
                     />
                   </div>
                   <div>
-                    <p className="font-medium text-sm group-hover:text-primary transition-colors">{member.name}</p>
+                    <p className="font-medium text-sm">{member.name}</p>
                     <p className="text-xs text-muted-foreground line-clamp-1">{member.character}</p>
                   </div>
-                </Link>
+                </div>
               ))}
             </div>
           </div>

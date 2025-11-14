@@ -18,14 +18,11 @@ export function MediaCard({ item, showPlay, href }: MediaCardProps) {
   const year = item.release_date?.split('-')[0] || item.first_air_date?.split('-')[0]
   const rating = item.vote_average || 0
   const posterUrl = getImageUrl(item.poster_path, 'w500')
-  
-  const linkHref = href || (mediaType === 'person' ? `/person/${item.id}` : `/${mediaType}/${item.id}`)
-  
-  return (
-    <Link 
-      href={linkHref}
-      className="group relative block transition-all duration-300"
-    >
+
+  const linkHref = href || (mediaType === 'person' ? undefined : `/${mediaType}/${item.id}`)
+
+  const content = (
+    <>
       <div className="relative aspect-[2/3] rounded-lg overflow-hidden bg-muted glass-hover">
         {posterUrl ? (
           <Image
@@ -40,7 +37,7 @@ export function MediaCard({ item, showPlay, href }: MediaCardProps) {
             <span className="text-sm">No Image</span>
           </div>
         )}
-        
+
         {showPlay && mediaType !== 'person' && (
           <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/60">
             <div className="w-16 h-16 rounded-full bg-primary flex items-center justify-center">
@@ -48,7 +45,7 @@ export function MediaCard({ item, showPlay, href }: MediaCardProps) {
             </div>
           </div>
         )}
-        
+
         {rating > 0 && (
           <div className="absolute top-2 right-2 glass px-2 py-1 rounded-md flex items-center gap-1">
             <Star className="h-3 w-3 text-yellow-500 fill-yellow-500" />
@@ -56,7 +53,7 @@ export function MediaCard({ item, showPlay, href }: MediaCardProps) {
           </div>
         )}
       </div>
-      
+
       <div className="mt-3 space-y-1">
         <h3 className="font-medium line-clamp-1 text-sm group-hover:text-primary transition-colors">
           {title}
@@ -65,6 +62,23 @@ export function MediaCard({ item, showPlay, href }: MediaCardProps) {
           <p className="text-xs text-muted-foreground">{year}</p>
         )}
       </div>
+    </>
+  )
+
+  if (mediaType === 'person') {
+    return (
+      <div className="group relative block transition-all duration-300">
+        {content}
+      </div>
+    )
+  }
+
+  return (
+    <Link
+      href={linkHref!}
+      className="group relative block transition-all duration-300"
+    >
+      {content}
     </Link>
   )
 }

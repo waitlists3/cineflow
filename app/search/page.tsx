@@ -32,10 +32,9 @@ export default function SearchPage() {
   
   useEffect(() => {
     if (filter === 'all') {
-      setFilteredResults(results)
+      setFilteredResults(results.filter(item => item.media_type !== 'person'))
     } else {
       setFilteredResults(results.filter(item => {
-        if (filter === 'person') return item.media_type === 'person'
         if (filter === 'movie') return item.media_type === 'movie' || (item.title && !item.media_type)
         if (filter === 'tv') return item.media_type === 'tv' || (item.name && !item.title && !item.media_type)
         return true
@@ -51,7 +50,7 @@ export default function SearchPage() {
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
             <Input
               type="text"
-              placeholder="Search for movies, TV shows, or people..."
+              placeholder="Search for movies, TV shows..."
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               className="pl-12 h-14 text-lg glass"
@@ -80,13 +79,6 @@ export default function SearchPage() {
               size="sm"
             >
               TV Shows
-            </Button>
-            <Button
-              variant={filter === 'person' ? 'default' : 'secondary'}
-              onClick={() => setFilter('person')}
-              size="sm"
-            >
-              People
             </Button>
           </div>
         </div>
