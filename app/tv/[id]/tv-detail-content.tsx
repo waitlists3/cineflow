@@ -15,11 +15,12 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 
-export function TVDetailContent({ show, initialSeason, initialEpisode, isWatchMode }: { 
+export function TVDetailContent({ show, initialSeason, initialEpisode, isWatchMode, id }: {
   show: MovieDetails
   initialSeason?: number
   initialEpisode?: number
   isWatchMode?: boolean
+  id?: string | number
 }) {
   const [inWatchlist, setInWatchlist] = useState(false)
   const [muted, setMuted] = useState(true)
@@ -29,7 +30,8 @@ export function TVDetailContent({ show, initialSeason, initialEpisode, isWatchMo
   const [showPlayer, setShowPlayer] = useState(isWatchMode || false)
   const [currentEpisode, setCurrentEpisode] = useState(initialEpisode || 1)
   const iframeRef = useRef<HTMLIFrameElement>(null)
-  
+  const tvId = id || show.id
+
   useEffect(() => {
     setInWatchlist(isInWatchlist(show.id, 'tv'))
   }, [show.id])
@@ -134,7 +136,7 @@ export function TVDetailContent({ show, initialSeason, initialEpisode, isWatchMo
         </button>
         <iframe
           ref={iframeRef}
-          src={`https://vidzy.luna.tattoo/embed/tv/${show.id}/${selectedSeason}/${currentEpisode}`}
+          src={`https://vidzy.luna.tattoo/embed/tv/${tvId}/${selectedSeason}/${currentEpisode}`}
           className="w-full h-full"
           allowFullScreen
           allow="autoplay; fullscreen"
@@ -143,6 +145,7 @@ export function TVDetailContent({ show, initialSeason, initialEpisode, isWatchMo
     )
   }
   
+  const tvId = id || show.id
   const trailer = show.videos?.results?.find(v => v.type === 'Trailer' && v.site === 'YouTube')
   const logo = show.images?.logos?.find(l => l.file_path)
   const cast = show.credits?.cast?.slice(0, 10) || []

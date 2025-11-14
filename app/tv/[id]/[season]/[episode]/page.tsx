@@ -36,6 +36,7 @@ export default async function EpisodePage({
         initialSeason={seasonNumber}
         initialEpisode={episodeNumber}
         isWatchMode={searchParams.watch === 'true'}
+        id={params.id}
       />
 
       {recommendations.length > 0 && (
