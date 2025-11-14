@@ -6,9 +6,8 @@ import type { Metadata } from 'next'
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
   const { id } = await params
   const show = await getTVDetails(parseInt(id))
-  
+
   return {
-    title: `${show.name} - CineFlow`,
     description: show.overview,
     openGraph: {
       title: show.name || '',

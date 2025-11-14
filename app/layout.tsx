@@ -8,7 +8,7 @@ const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'CineFlow - Stream Movies & TV Shows',
+  title: 'Cineflow',
   description: 'Watch the latest movies and TV series in stunning 4K quality. Discover new releases, trending content, and timeless classics on CineFlow - your ultimate streaming destination.',
   keywords: [
     'stream movies',

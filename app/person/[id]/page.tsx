@@ -7,9 +7,8 @@ import type { Metadata } from 'next'
 
 export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
   const person = await getPersonDetails(parseInt(params.id))
-  
+
   return {
-    title: `${person.name} - CineFlow`,
     description: person.biography,
   }
 }
