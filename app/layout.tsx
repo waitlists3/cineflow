@@ -8,7 +8,7 @@ const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'CineFlow - Stream Movies & TV Shows in 4K Quality',
+  title: 'CineFlow - Stream Movies & TV Shows',
   description: 'Watch the latest movies and TV series in stunning 4K quality. Discover new releases, trending content, and timeless classics on CineFlow - your ultimate streaming destination.',
   keywords: [
     'stream movies',
@@ -35,17 +35,19 @@ export const metadata: Metadata = {
     'watch online',
     'movies and series',
     'cineflow streaming',
+    'lunastream',
+    'free movies online',
   ],
   authors: [{ name: 'CineFlow' }],
   openGraph: {
-    title: 'CineFlow - Stream Movies & TV Shows in 4K',
-    description: 'Watch the latest movies and TV series in stunning 4K quality',
+    title: 'CineFlow - Stream Movies & TV Shows',
+    description: 'Watch the latest movies and TV series',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'CineFlow - Stream Movies & TV Shows in 4K',
-    description: 'Watch the latest movies and TV series in stunning 4K quality',
+    description: 'Watch the latest movies and TV series',
   },
   robots: {
     index: true,
@@ -57,7 +59,7 @@ export const metadata: Metadata = {
     statusBarStyle: 'black-translucent',
     title: 'CineFlow',
   },
-    generator: 'v0.app'
+    generator: 'cat'
 }
 
 export const viewport: Viewport = {
